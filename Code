@@ -1,0 +1,103 @@
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+void messageBreak(){
+    cout<<"\n";
+    for(int i=0; i<50;i++)
+    cout<<"=";
+    cout<<"\n";
+}
+
+void WelcomeMessage(){
+    cout<<"Welcome to Big's Burgers and fries!";
+    messageBreak();
+    cout<<"What would you like to order?\n1- Ala Carte Meal\n2-Combo meal";
+    messageBreak();
+}
+int OrderType(){
+    int Type;
+    cin>>Type;
+    while(Type != 1 && Type !=2){
+        cout<<"\nThat is not a choice! Please choose 1 or 2!:";
+        cin>>Type;
+    }
+    
+    return Type;
+}
+class TakingOrders{
+    public:
+    static int totalOrdersAla;
+    static int totalOrdersCombo;
+    int tempOrderAla;
+    int tempOrderCombo;
+    string name;
+    int OT;
+    int ChangeOrderRequest;
+    string MealName[2]={"Ala Carte meal","Combo Meal"};
+    TakingOrders(){
+        OT=OrderType();
+        gettingOrders();
+    }
+    
+    private:
+    int OrderAmount;
+    
+    int gettingOrders(){
+        
+        
+        cout<<"How many of "<<MealName[--OT]<<" would you like?:";
+        cin>>OrderAmount;
+        while(OrderAmount>10 || OrderAmount<1){
+            cout<<"The order amount can't be more than 10 or less than 1!";
+            messageBreak();
+         cout<<"Please Order again:";
+            cin>>OrderAmount;
+         }
+        cout<<"Alright that would be "<<OrderAmount<<" of "<<MealName[OT]<<" to your order!\n";
+        if(OT ==1)
+        tempOrderAla=OrderAmount;
+        else
+        tempOrderCombo=OrderAmount;
+        return OrderAmount;
+    }
+    void OrderReceipt(int NumAla, int NumCombo){
+        
+        messageBreak();
+        cout<<"Thank you for Ordering , Here is your Receipt:";
+    }
+    
+    
+    void ChangingOrder(){
+        
+        cout<<"Would you like add or change your order?\n 1-Yes\n2-No";
+        cin>>ChangeOrderRequest;
+        while(ChangeOrderRequest != 1 && ChangeOrderRequest !=2){
+        cout<<"\nThat is not a choice! Please choose 1 or 2!:";
+        cin>>ChangeOrderRequest;
+        }
+        if(ChangeOrderRequest ==1){
+        cout<<"What would you like to order?\n1- Ala Carte Meal\n2-Combo meal";
+        OT=OrderType();
+        gettingOrders();
+        
+        }
+        
+        
+        
+    }
+    
+    
+};
+
+int main()
+{  
+    
+    WelcomeMessage();
+    TakingOrders Order;
+    
+    return 0;
+}
