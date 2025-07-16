@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <iterator>
+#include <cmath>
 
 using namespace std;
 
@@ -20,6 +21,11 @@ void WelcomeMessage(){
     OrderMessage();
     messageBreak();
 }
+
+double roundTo2DP(double value) {
+    return round(value * 100.0) / 100.0;
+}
+
 int OrderType(){
     int Type=0;
     cin>>Type;
@@ -36,10 +42,12 @@ class TakingOrders{
     static int totalOrdersCombo;
     int tempOrderAla=0;
     int tempOrderCombo=0;
+    double tempTotalCost=0;
     string name;
     int OT=0;
     int ChangeOrderRequest=0;
     string MealName[2]={"Ala Carte meal","Combo Meal"};
+    double MealPrice[2]={2.34,4.56};
     TakingOrders(){
         OT=OrderType();
         gettingOrders();
@@ -69,14 +77,17 @@ class TakingOrders{
         return OrderAmount;
     }
     void OrderReceipt(int NumAla, int NumCombo){
-        int Num[2]= {NumAla,NumCombo};
+        int Quantity[2]= {NumAla,NumCombo};
         messageBreak();
-        cout<<"Thank you for Ordering , Here is your Receipt:";
-        messageBreak();
-        for(int j=0;j<size(Num);j++){
-            if(Num[j]!=0)
-            cout<<MealName[j]<<" - "<<Num[j]<<"\n";
+        cout<<"Thank you for Ordering , Here is your Receipt:\n";
+        for(int j=0;j<size(Quantity);j++){
+            if(Quantity[j]!=0){
+            cout<<MealName[j]<<" - "<<Quantity[j]<<" |  ";
+            cout<<"$ "<<roundTo2DP(Quantity[j]*MealPrice[j])<<"\n";
+            tempTotalCost+=Quantity[j]*MealPrice[j];
+            }
         }
+        cout<<"Total Cost: $"<<tempTotalCost;
         messageBreak();
     }
     
