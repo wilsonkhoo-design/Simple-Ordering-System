@@ -36,10 +36,11 @@ int OrderType(){
     
     return Type;
 }
+
 class TakingOrders{
     public:
-    static int totalOrdersAla;
-    static int totalOrdersCombo;
+    inline static int totalOrdersAla;
+    inline static int totalOrdersCombo;
     int tempOrderAla=0;
     int tempOrderCombo=0;
     double tempTotalCost=0;
@@ -109,13 +110,16 @@ class TakingOrders{
         
             }
         }
-        
+        totalOrdersAla+=tempOrderAla;
+        totalOrdersCombo+=tempOrderCombo;
         
         
     }
     
     
 };
+
+
 
 int main()
 {  
