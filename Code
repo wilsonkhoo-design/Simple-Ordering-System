@@ -1,9 +1,12 @@
 #include <iostream>
 #include <string>
+#include <iterator>
 
 using namespace std;
 
-
+void OrderMessage(){
+    cout<<"What would you like to order?\n1- Ala Carte Meal\n2-Combo meal";
+}
 void messageBreak(){
     cout<<"\n";
     for(int i=0; i<50;i++)
@@ -14,7 +17,7 @@ void messageBreak(){
 void WelcomeMessage(){
     cout<<"Welcome to Big's Burgers and fries!";
     messageBreak();
-    cout<<"What would you like to order?\n1- Ala Carte Meal\n2-Combo meal";
+    OrderMessage();
     messageBreak();
 }
 int OrderType(){
@@ -40,7 +43,10 @@ class TakingOrders{
     TakingOrders(){
         OT=OrderType();
         gettingOrders();
+        cout<<"\n Temp Ala:"<<tempOrderAla<<"\n";
+        cout<<"\n Temp Combo:"<<tempOrderCombo<<"\n";
         ChangingOrder();
+        OrderReceipt(tempOrderAla,tempOrderCombo);
     }
     
     private:
@@ -58,16 +64,20 @@ class TakingOrders{
             cin>>OrderAmount;
          }
         cout<<"Alright that would be "<<OrderAmount<<" of "<<MealName[OT]<<" to your order!\n";
-        if(OT ==1)
+        if(OT ==0)
         tempOrderAla=OrderAmount;
         else
         tempOrderCombo=OrderAmount;
         return OrderAmount;
     }
     void OrderReceipt(int NumAla, int NumCombo){
-        
+        int Num[2]= {NumAla,NumCombo};
         messageBreak();
         cout<<"Thank you for Ordering , Here is your Receipt:";
+        for(int j=0;j<size(Num);j++){
+            if(Num[j]!=0)
+            cout<<MealName[j]<<" - "<<Num[j];
+        }
     }
     
     
@@ -81,7 +91,7 @@ class TakingOrders{
                 }
             if(ChangeOrderRequest ==1){
                 messageBreak();
-                cout<<"What would you like to order?\n1- Ala Carte Meal\n2-Combo meal";
+                OrderMessage();
                 messageBreak();
                 OT=OrderType();
                 gettingOrders();
