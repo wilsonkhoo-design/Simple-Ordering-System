@@ -21,7 +21,7 @@ void WelcomeMessage(){
     messageBreak();
 }
 int OrderType(){
-    int Type;
+    int Type=0;
     cin>>Type;
     while(Type != 1 && Type !=2){
         cout<<"\nThat is not a choice! Please choose 1 or 2!:";
@@ -34,17 +34,15 @@ class TakingOrders{
     public:
     static int totalOrdersAla;
     static int totalOrdersCombo;
-    int tempOrderAla;
-    int tempOrderCombo;
+    int tempOrderAla=0;
+    int tempOrderCombo=0;
     string name;
-    int OT;
-    int ChangeOrderRequest;
+    int OT=0;
+    int ChangeOrderRequest=0;
     string MealName[2]={"Ala Carte meal","Combo Meal"};
     TakingOrders(){
         OT=OrderType();
         gettingOrders();
-        cout<<"\n Temp Ala:"<<tempOrderAla<<"\n";
-        cout<<"\n Temp Combo:"<<tempOrderCombo<<"\n";
         ChangingOrder();
         OrderReceipt(tempOrderAla,tempOrderCombo);
     }
@@ -74,10 +72,12 @@ class TakingOrders{
         int Num[2]= {NumAla,NumCombo};
         messageBreak();
         cout<<"Thank you for Ordering , Here is your Receipt:";
+        messageBreak();
         for(int j=0;j<size(Num);j++){
             if(Num[j]!=0)
-            cout<<MealName[j]<<" - "<<Num[j];
+            cout<<MealName[j]<<" - "<<Num[j]<<"\n";
         }
+        messageBreak();
     }
     
     
