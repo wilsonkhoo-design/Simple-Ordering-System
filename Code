@@ -4,9 +4,11 @@
 #include <cmath>
 
 using namespace std;
-
+void MenuMessage(){
+    cout<<"MAIN MENU\nPlease Choose your action:\n1-View Total Orders\n2-Take an Order";
+}
 void OrderMessage(){
-    cout<<"What would you like to order?\n1- Ala Carte Meal\n2-Combo meal";
+    cout<<"What would you like to order?\n1- Ala Carte Meal\n2-Combo meal\n";
 }
 void messageBreak(){
     cout<<"\n";
@@ -18,7 +20,7 @@ void messageBreak(){
 void WelcomeMessage(){
     cout<<"Welcome to Big's Burgers and fries!";
     messageBreak();
-    OrderMessage();
+    MenuMessage();
     messageBreak();
 }
 
@@ -37,6 +39,16 @@ int OrderType(){
     return Type;
 }
 
+int ChoosingMenu(){
+    int Choice;
+    cin>>Choice;
+    while(Choice != 1 && Choice !=2){
+        cout<<"\nThat is not a choice! Please choose 1 or 2!:";
+        cin>>Choice;
+    }
+    return Choice;
+}
+
 class TakingOrders{
     public:
     inline static int totalOrdersAla;
@@ -50,6 +62,7 @@ class TakingOrders{
     string MealName[2]={"Ala Carte meal","Combo Meal"};
     double MealPrice[2]={2.34,4.56};
     TakingOrders(){
+        OrderMessage();
         OT=OrderType();
         gettingOrders();
         ChangingOrder();
@@ -119,13 +132,24 @@ class TakingOrders{
     
 };
 
-
+class MainMenu{
+    public:
+    int MenuChoice;
+    MainMenu(){
+        WelcomeMessage();
+        MenuChoice=ChoosingMenu();
+        if(MenuChoice =2)
+        TakingOrders Order;
+        
+    }
+    private:
+    
+};
 
 int main()
 {  
     
-    WelcomeMessage();
-    TakingOrders Order;
+    MainMenu StartUp;
     
     return 0;
 }
