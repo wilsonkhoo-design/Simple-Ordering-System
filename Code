@@ -5,7 +5,7 @@
 
 using namespace std;
 void MenuMessage(){
-    cout<<"MAIN MENU\nPlease Choose your action:\n1-View Total Orders\n2-Take an Order";
+    cout<<"MAIN MENU\nPlease Choose your action:\n1- View Total Orders\n2- Take an Order\n3- Exit and End Shift";
 }
 void OrderMessage(){
     cout<<"What would you like to order?\n1- Ala Carte Meal\n2-Combo meal\n";
@@ -18,7 +18,7 @@ void messageBreak(){
 }
 
 void WelcomeMessage(){
-    cout<<"Welcome to Big's Burgers and fries!";
+    
     messageBreak();
     MenuMessage();
     messageBreak();
@@ -42,7 +42,7 @@ int OrderType(){
 int ChoosingMenu(){
     int Choice;
     cin>>Choice;
-    while(Choice != 1 && Choice !=2){
+    while(Choice != 1 && Choice !=2 && Choice !=3){
         cout<<"\nThat is not a choice! Please choose 1 or 2!:";
         cin>>Choice;
     }
@@ -139,17 +139,27 @@ class TakingOrders{
 class MainMenu{
     public:
     int MenuChoice;
-    double TotalCost;
+    double TotalCost=0;
+    bool EndOfShift=true;
     TakingOrders Order;
     MainMenu(){
-        while(1){
+        cout<<"Welcome to Big's Burgers and fries!";
+        while(EndOfShift){
         WelcomeMessage();
         MenuChoice=ChoosingMenu();
-        cout<<"Here's the menu choice:"<<MenuChoice<<"\n";
-        if(MenuChoice ==2)
-        Order.Orders();
-        else
-        TotalOrder(Order.totalOrdersAla,Order.totalOrdersCombo);
+        switch(MenuChoice){
+            case 1:
+            TotalOrder(Order.totalOrdersAla,Order.totalOrdersCombo);
+            break;
+            case 2:
+            Order.Orders();
+            break;
+            
+            default:
+            ShiftEnd();
+            break;
+        }
+        
         }
         
         
@@ -168,6 +178,11 @@ class MainMenu{
         }
         cout<<"Total Cost: $"<<TotalCost;
         messageBreak();
+    }
+    void ShiftEnd(){
+        cout<<"Thank you for your hard work! Here's the total Order for today:\n";
+        TotalOrder(Order.totalOrdersAla,Order.totalOrdersCombo);
+        EndOfShift=false;
     }
     
 };
