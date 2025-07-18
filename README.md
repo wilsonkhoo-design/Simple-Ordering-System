@@ -9,5 +9,5 @@ Store all the amount ordered during runtime.
 
 
 # Improvement to be added 
-Dynamic Memory for the ordering system
+Dynamic Memory for the ordering system,
 Use struct(ie user defined data type) for the meals 
