@@ -61,7 +61,7 @@ class TakingOrders{
     int ChangeOrderRequest=0;
     string MealName[2]={"Ala Carte meal","Combo Meal"};
     double MealPrice[2]={2.34,4.56};
-    TakingOrders(){
+    void Orders(){
         OrderMessage();
         OT=OrderType();
         gettingOrders();
@@ -70,7 +70,7 @@ class TakingOrders{
     }
     
     private:
-    int OrderAmount;
+    int OrderAmount=0;
     
     int gettingOrders(){
         
@@ -99,9 +99,13 @@ class TakingOrders{
             cout<<MealName[j]<<" - "<<Quantity[j]<<" |  ";
             cout<<"$ "<<roundTo2DP(Quantity[j]*MealPrice[j])<<"\n";
             tempTotalCost+=Quantity[j]*MealPrice[j];
+            
             }
         }
         cout<<"Total Cost: $"<<tempTotalCost;
+        tempTotalCost =0;
+        tempOrderAla=0;
+        tempOrderCombo=0;
         messageBreak();
     }
     
@@ -125,7 +129,7 @@ class TakingOrders{
         }
         totalOrdersAla+=tempOrderAla;
         totalOrdersCombo+=tempOrderCombo;
-        
+        ChangeOrderRequest=0;
         
     }
     
@@ -135,14 +139,36 @@ class TakingOrders{
 class MainMenu{
     public:
     int MenuChoice;
+    double TotalCost;
+    TakingOrders Order;
     MainMenu(){
+        while(1){
         WelcomeMessage();
         MenuChoice=ChoosingMenu();
-        if(MenuChoice =2)
-        TakingOrders Order;
+        cout<<"Here's the menu choice:"<<MenuChoice<<"\n";
+        if(MenuChoice ==2)
+        Order.Orders();
+        else
+        TotalOrder(Order.totalOrdersAla,Order.totalOrdersCombo);
+        }
+        
         
     }
     private:
+    void TotalOrder(int NumAla, int NumCombo){
+        int Quantity[2]= {NumAla,NumCombo};
+        messageBreak();
+        cout<<"Here's the total orders so far:\n";
+        for(int j=0;j<size(Quantity);j++){
+            if(Quantity[j]!=0){
+            cout<<Order.MealName[j]<<" - "<<Quantity[j]<<" |  ";
+            cout<<"$ "<<roundTo2DP(Quantity[j]*Order.MealPrice[j])<<"\n";
+            TotalCost+=Quantity[j]*Order.MealPrice[j];
+            }
+        }
+        cout<<"Total Cost: $"<<TotalCost;
+        messageBreak();
+    }
     
 };
 
