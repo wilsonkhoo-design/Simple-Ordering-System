@@ -177,6 +177,7 @@ class MainMenu{
             }
         }
         cout<<"Total Cost: $"<<TotalCost;
+        TotalCost=0;
         messageBreak();
     }
     void ShiftEnd(){
